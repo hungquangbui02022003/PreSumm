@@ -1,16 +1,27 @@
 # PreSumm
 
-**This code is for EMNLP 2019 paper [Text Summarization with Pretrained Encoders](https://arxiv.org/abs/1908.08345)**
+## Usage
 
-**Updates Jan 22 2020**: Now you can **Summarize Raw Text Input!**. Swith to the dev branch, and use `-mode test_text` and use `-text_src $RAW_SRC.TXT` to input your text file. Please still use master branch for normal training and evaluation, dev branch should be only used for test_text mode.
-* abstractive use -task abs, extractive use -task ext
-* use `-test_from $PT_FILE$` to use your model checkpoint file.
-* Format of the source text file:
-  * For **abstractive summarization**, each line is a document.
-  * If you want to do **extractive summarization**, please insert ` [CLS] [SEP] ` as your sentence boundaries.
-* There are example input files in the [raw_data directory](https://github.com/nlpyang/PreSumm/tree/dev/raw_data)
-* If you also have reference summaries aligned with your source input, please use `-text_tgt $RAW_TGT.TXT` to keep the order for evaluation.
+### Extractive Summarization
+Run the following command:
+```bash
+python run.py -task ext -test_from $PT_FILE$
+```
 
+### Abstractive Summarization
+Run the following command:
+```bash
+python run.py -task abs -test_from $PT_FILE$
+```
+
+## Input Text File Format
+
+- **Abstractive summarization**: Each line in the input file represents a document.
+- **Extractive summarization**: Use `[CLS] [SEP]` as sentence boundaries.
+- Example input files can be found in the `raw_data` directory.
+- If a reference summary is available, use the following command to maintain order for evaluation:
+  ```bash
+  python run.py -task abs -text_tgt $RAW_TGT.TXT$
 
 Results on CNN/DailyMail (20/8/2019):
 
